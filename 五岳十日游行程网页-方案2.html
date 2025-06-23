@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五岳十日游·青春无畏 - 初二学生励志成长特训营</title>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=71da4f7379552c53ae66e3e3f7861023&plugin=AMap.Driving"></script>
+    <style>
+        :root {
+            --klein-blue: #002FA7;
+            --klein-blue-light: #2046B3;
+            --klein-blue-dark: #001F73;
+            --accent-color: #00E4FF;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --card-bg: #fff;
+            --section-bg: rgba(0, 47, 167, 0.03);
+            --shadow: 0 10px 30px rgba(0, 47, 167, 0.10);
+            --shadow-hover: 0 16px 40px rgba(0, 47, 167, 0.16);
+            --radius: 15px;
+            --font-main: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 40px 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-dark));
+            color: white;
+            padding: 60px 0 80px 0;
+            position: relative;
+            margin-bottom: 40px;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 24px;
+        }
+        
+        .header-content::before {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            background: linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.12) 60%,transparent 100%);
+            z-index: -1;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.12;
+        }
+        
+        .header-bg .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        .header-bg .circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-bg .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        
+        .circle-1 {
+            width: 320px;
+            height: 320px;
+            top: -100px;
+            right: -60px;
+        }
+        
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            bottom: -60px;
+            left: 12%;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 3.2rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
+            letter-spacing: 1px;
+            opacity: 1;
+        }
+
+        .header .subtitle {
+            color: #f0f4ff;
+            font-size: 1.6rem;
+            margin-bottom: 36px;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 1;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+
+        .motivation {
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 36px 28px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .motivation:hover {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section {
+            background: var(--section-bg);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            margin-bottom: 36px;
+            box-shadow: var(--shadow);
+        }
+
+        .section h2 {
+            color: var(--klein-blue-light);
+            font-size: 2rem;
+            margin-bottom: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background-color: var(--accent-color);
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .route-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin: 20px 0;
+        }
+
+        .route-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .route-card:hover {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .route-card .icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+        }
+
+        .route-card h3 {
+            color: var(--klein-blue-light);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .map-container {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: var(--section-bg);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            color: var(--klein-blue-light);
+            border: 2px dashed rgba(0, 47, 167, 0.2);
+        }
+
+        .day-schedule {
+            margin: 20px 0;
+        }
+
+        .day-header {
+            background: var(--klein-blue);
+            color: white;
+            padding: 14px 18px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 0 0 var(--radius) var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 47, 167, 0.08);
+        }
+
+        .schedule-table th {
+            background: var(--section-bg);
+            color: var(--klein-blue);
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .budget-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 28px;
+        }
+
+        .budget-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: var(--border-width) solid var(--border-color);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .budget-card .icon {
+            width: 32px;
+            height: 32px;
+            border: var(--border-width) solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin: 0 auto 12px auto;
+        }
+
+        .budget-card h3 {
+            color: var(--text-color);
+            font-size: 1em;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .budget-card .amount {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 8px 0;
+            color: var(--text-color);
+        }
+
+        .total-budget {
+            background: var(--card-bg);
+            border: var(--border-width) solid var(--border-color);
+            color: var(--text-color);
+            padding: 24px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .total-budget h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .total-budget .amount {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 已完成待办项的样式 */
+        .checklist-item input[type="checkbox"]:checked + label {
+            color: #888;
+            text-decoration: line-through;
+        }
+        
+        .checklist-item input[type="checkbox"]:checked + label::after {
+            content: " - 已完成";
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .checklist-item .icon-svg {
+            flex-shrink: 0;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .tips {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border: var(--border-width) solid var(--border-color);
+        }
+
+        .tips h3 {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .tips h3 .icon-svg {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .tips ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tips li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips li .icon-svg {
+            margin-right: 10px;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .tips li .icon-svg {
+            margin-right: 10px;
+        }
+
+        /* 这个样式定义已移至下方统一定义 */
+
+        /* 打卡护照样式 */
+        .passport-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid #dee2e6;
+        }
+
+        .passport-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .passport-header h3 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .passport-header p {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .passport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .passport-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px dashed #dee2e6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .passport-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .mountain-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .passport-card h4 {
+            color: #495057;
+            margin: 10px 0;
+            font-size: 1.3em;
+        }
+
+        .passport-card .location {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .passport-card .date {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .stamp-area {
+            border: 2px dashed #dc3545;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background: #fff5f5;
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .passport-card .challenge {
+            background: linear-gradient(135deg, #ffc107, #e0a800);
+            color: #212529;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* 朋友圈发布攻略样式 */
+        .social-plan {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .day-post {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .day-post:hover {
+            transform: translateY(-3px);
+        }
+
+        .day-post.special-post {
+            border: 3px solid #ffc107;
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        }
+
+        .post-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .special-post .post-header {
+            background: linear-gradient(135deg, #ffc107, #e0a800);
+            color: #212529;
+        }
+
+        .post-day {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .post-title {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-images {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #1565c0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            border-left: 4px solid #2196f3;
+        }
+
+        .post-text {
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .post-text strong {
+            color: #007bff;
+        }
+
+        /* 详细行程表格样式 */
+        .day-schedule {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .day-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        
+        .schedule-table th {
+            background: #f8f9fa;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .schedule-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: top;
+        }
+        
+        .schedule-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .schedule-table td:first-child {
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .schedule-table td:last-child {
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .more-days {
+            margin-top: 30px;
+        }
+        
+        .more-days details {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .more-days summary {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        /* 地图容器样式 */
+        .map-container {
+            height: 400px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        #route-map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .route-info {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .route-info p {
+            margin: 15px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .route-info .route-line {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+            
+            .city-icon {
+                font-size: 2em;
+                margin-right: 15px;
+                min-width: 50px;
+                text-align: center;
+            }
+            
+            .city-info {
+                flex: 1;
+            }
+            
+            .city-name {
+                font-weight: bold;
+                font-size: 1.1em;
+                margin-bottom: 4px;
+            }
+            
+            .city-location {
+                font-size: 0.9em;
+                opacity: 0.8;
+                margin-bottom: 2px;
+            }
+            
+            .city-date {
+                font-size: 0.85em;
+                opacity: 0.7;
+            }
+            
+            .city-feature {
+                font-size: 0.9em;
+                font-weight: bold;
+                margin-top: 4px;
+                padding: 4px 8px;
+                background: rgba(255,255,255,0.2);
+                border-radius: 12px;
+                display: inline-block;
+            }
+            
+            .regular-city .city-feature {
+                background: #007bff;
+                color: white;
+            }
+            
+            /* 五岳打卡护照增强样式 */
+            .passport-card {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .passport-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+                pointer-events: none;
+            }
+            
+            .passport-card:nth-child(1) {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            
+            .passport-card:nth-child(2) {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            }
+            
+            .passport-card:nth-child(3) {
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            }
+            
+            .passport-card:nth-child(4) {
+                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            }
+            
+            .passport-card:nth-child(5) {
+                background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            }
+            
+            .mountain-icon {
+                font-size: 2.5em;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            
+            .challenge {
+                background: rgba(255,255,255,0.2);
+                padding: 8px;
+                border-radius: 15px;
+                margin-top: 10px;
+                font-size: 0.9em;
+                backdrop-filter: blur(10px);
+            }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .schedule-table {
+                font-size: 0.9em;
+            }
+            
+            .route-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cities-side {
+                padding: 15px;
+            }
+            
+            .city-icon {
+                font-size: 1.5em;
+                margin-right: 10px;
+                min-width: 40px;
+            }
+            
+            .city-name {
+                font-size: 1em;
+            }
+            
+            .city-location, .city-date {
+                font-size: 0.8em;
+            }
+        }
+        
+        /* SVG图标样式定义 */
+        .icon-svg {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .icon-svg svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: var(--klein-blue);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-bg">
+                <div class="grid"></div>
+                <div class="circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <h1>五岳征程·青春无畏</h1>
+                <div class="subtitle">初二学生励志成长特训营</div>
+                <div class="motivation">
+                    通过攀登五岳，锻炼毅力，建立信心，成就更好的自己！
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> 五岳征程路线图</h2>
+            <div class="map-container">
+                <div id="route-map"></div>
+            </div>
+            <div class="route-info">
+                <div class="route-line">
+                    <span class="icon-svg"></span> 路线概览：北京 → 大同(恒山) → 西安(华山) → 郑州(嵩山) → 衡阳(衡山) → 泰安(泰山) → 北京
+                </div>
+                <p><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>交通方式：</strong>全程高铁连接，总里程约4000公里</p>
+                <p><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></span> <strong>行程时长：</strong>9天8夜，深度体验五岳文化与历史底蕴</p>
+                <p><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg></span> <strong>五岳特色：</strong>东岳泰山(雄)、西岳华山(险)、南岳衡山(秀)、北岳恒山(奇)、中岳嵩山(峻)</p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> 详细行程安排</h2>
+            
+            <!-- D1 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D1 - 7月5日（周六）：北京北 → 大同南 → 大同博物馆 → 华严寺 → 云冈石窟</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>07:30</td>
+                            <td>北京北站集合</td>
+                            <td>提前30分钟到站</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>08:06</td>
+                            <td>G2455次高铁出发（北京北→大同南）</td>
+                            <td>车程约1小时50分钟</td>
+                            <td>G2455次 08:06-09:56</td>
+                        </tr>
+                        <tr>
+                            <td>09:56</td>
+                            <td>抵达大同南站</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>10:15</td>
+                            <td>乘坐出租车前往大同博物馆</td>
+                            <td>车程约20分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>10:40-12:10</td>
+                            <td>参观大同博物馆</td>
+                            <td>了解大同历史文化</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>12:10-13:10</td>
+                            <td>博物馆附近用午餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:10-13:30</td>
+                            <td>前往华严寺</td>
+                            <td>车程约15分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:30-15:00</td>
+                            <td>游览华严寺</td>
+                            <td>欣赏辽金时期建筑艺术</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>15:00-15:30</td>
+                            <td>前往云冈石窟</td>
+                            <td>车程约30分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>15:30-18:00</td>
+                            <td>游览云冈石窟</td>
+                            <td>重点游览第5、6、16-20窟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>18:00-18:30</td>
+                            <td>前往悬空寺附近酒店</td>
+                            <td>车程约30分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>18:30</td>
+                            <td>抵达酒店，办理入住</td>
+                            <td>悬空寺附近酒店</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>19:00-20:00</td>
+                            <td>晚餐</td>
+                            <td>品尝当地特色菜</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>21:00</td>
+                            <td>休息，准备明日行程</td>
+                            <td>早休息，明日早起</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D2 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D2 - 7月6日（周日）：悬空寺 → 恒山 → 应县西 → 太原</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>07:00</td>
+                            <td>酒店早餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>07:30</td>
+                            <td>退房，前往悬空寺</td>
+                            <td>车程约1.5小时</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>09:00</td>
+                            <td>游览悬空寺</td>
+                            <td>门票130元，游览时间约1.5小时</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>10:30</td>
+                            <td>前往恒山景区</td>
+                            <td>车程约30分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>10:00-13:00</td>
+                            <td>登恒山</td>
+                            <td>可选择索道上下山</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:00-14:00</td>
+                            <td>山下用午餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>15:00</td>
+                            <td>前往应县西站</td>
+                            <td>车程约1小时</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>16:00</td>
+                            <td>抵达应县西站</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>20:16</td>
+                            <td>高铁出发（应县西→太原南）</td>
+                            <td>车程约2小时</td>
+                            <td>D1129 20:16-22:15</td>
+                        </tr>
+                        <tr>
+                            <td>22:15</td>
+                            <td>抵达太原南站</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>22:45</td>
+                            <td>前往酒店，办理入住</td>
+                            <td>推荐太原市区酒店</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>23:15-24:00</td>
+                            <td>简单晚餐</td>
+                            <td>酒店附近便利店或24小时餐厅</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>24:00</td>
+                            <td>休息</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D3 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D3 - 7月7日（周一）：太原 → 晋祠 → 西安北 → 华山北</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>07:00</td>
+                            <td>酒店早餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>08:00-08:30</td>
+                            <td>前往晋祠</td>
+                            <td>车程约30分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>08:30-11:30</td>
+                            <td>游览晋祠</td>
+                            <td>门票60元，了解山西历史文化</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>11:30-12:30</td>
+                            <td>午餐</td>
+                            <td>品尝太原特色美食</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>12:30-13:00</td>
+                            <td>返回太原市区</td>
+                            <td>短暂休息</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:00-13:40</td>
+                            <td>退房，前往太原南站</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>13:40-14:30</td>
+                            <td>太原南站候车</td>
+                            <td>准备登车</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>14:40</td>
+                            <td>高铁出发（太原南→西安北）</td>
+                            <td>车程约3小时</td>
+                            <td>D2565 14:40-17:35</td>
+                        </tr>
+                        <tr>
+                            <td>17:35-17:53</td>
+                            <td>西安北站换乘</td>
+                            <td>换乘时间18分钟</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>17:53</td>
+                            <td>高铁出发（西安北→华山北）</td>
+                            <td>车程约36分钟</td>
+                            <td>G2832 17:53-18:29</td>
+                        </tr>
+                        <tr>
+                            <td>18:29</td>
+                            <td>抵达华山北站</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>18:45</td>
+                            <td>前往华山脚下酒店</td>
+                            <td>推荐华山国际大酒店</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>19:15</td>
+                            <td>办理入住</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>19:30-20:30</td>
+                            <td>晚餐</td>
+                            <td>品尝华山当地特色美食</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>21:00</td>
+                            <td>休息，准备爬山</td>
+                            <td>建议早睡，明日凌晨爬山看日出</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D4 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D4 - 7月8日（周一）：华山</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>07:00</td>
+                            <td>酒店早餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>08:00</td>
+                            <td>前往华山景区</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>08:30</td>
+                            <td>开始登华山</td>
+                            <td>从玉泉院开始或乘索道上山</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>09:00-15:00</td>
+                            <td>游览华山各峰</td>
+                            <td>北峰→东峰→南峰→西峰，白天游览更安全</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>15:00-16:00</td>
+                            <td>山上用餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>16:00-17:30</td>
+                            <td>下山（建议乘索道）</td>
+                            <td>西峰索道下山较快</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>18:00-19:00</td>
+                            <td>华山脚下休息</td>
+                            <td>恢复体力</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>19:00-20:00</td>
+                            <td>晚餐</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>20:30</td>
+                            <td>返回华山脚下酒店</td>
+                            <td>继续住华山</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>21:00</td>
+                            <td>休息</td>
+                            <td>白天爬山，晚上充分休息</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- D5 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D5 - 7月9日（周三）：华山北 → 郑州东 → 登封</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>08:00</td><td>酒店早餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>08:00</td><td>前往华山北站</td><td>-</td><td>-</td></tr>
+                        <tr><td>08:57</td><td>G1712次高铁出发（华山北→郑州东）</td><td>车程约1小时32分钟</td><td>G1712次 08:57-10:29</td></tr>
+                        <tr><td>10:29</td><td>抵达郑州东站</td><td>-</td><td>-</td></tr>
+                        <tr><td>11:00-12:00</td><td>午餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>12:30-15:00</td><td>河南博物院</td><td>免费，需预约，重点文物讲解</td><td>-</td></tr>
+                        <tr><td>15:30-16:30</td><td>返回郑州东站</td><td>-</td><td>-</td></tr>
+                        <tr><td>16:30-18:00</td><td>乘坐大巴前往登封</td><td>车程约1.5小时</td><td>郑州东站→登封，大巴</td></tr>
+                        <tr><td>18:00-19:00</td><td>晚餐</td><td>品尝登封特色美食</td><td>-</td></tr>
+                        <tr><td>19:30</td><td>抵达嵩山少林寺景区附近酒店，办理入住</td><td>推荐少林寺景区附近酒店</td><td>-</td></tr>
+                        <tr><td>20:30</td><td>休息</td><td>为明天游览少林寺做准备</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D6 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D6 - 7月10日（周三）：登封 → 嵩山少林寺 → 郑州</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>交通信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06:30</td><td>酒店早餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:00</td><td>前往少林寺景区</td><td>从登封住处出发</td><td>-</td></tr>
+                        <tr><td>07:30-10:00</td><td>游览少林寺</td><td>门票80元，观看武术表演</td><td>-</td></tr>
+                        <tr><td>10:15-11:30</td><td>游览嵩阳书院</td><td>门票30元，中国最古老的四大书院之一</td><td>少林寺→嵩阳书院，约15分钟车程</td></tr>
+                        <tr><td>11:30-12:30</td><td>午餐</td><td>品尝登封特色美食</td><td>-</td></tr>
+                        <tr><td>12:45-14:15</td><td>游览中岳庙</td><td>门票30元，中国五岳庙宇之一</td><td>嵩阳书院→中岳庙，约15分钟车程</td></tr>
+                        <tr><td>14:30-16:30</td><td>登嵩山</td><td>中岳嵩山，门票80元</td><td>中岳庙→嵩山景区，约10分钟车程</td></tr>
+                        <tr><td>16:30-17:30</td><td>下山，晚餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>18:00</td><td>乘坐大巴返回郑州</td><td>车程约1.5小时</td><td>登封→郑州东站，大巴</td></tr>
+                        <tr><td>19:30</td><td>抵达郑州，入住酒店</td><td>推荐郑州东站附近酒店</td><td>-</td></tr>
+                        <tr><td>20:30</td><td>休息，整理照片</td><td>-</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D7 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D7 - 7月11日（周四）：郑州 → 衡山</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06:00</td><td>酒店早餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>06:30</td><td>前往郑州东站</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:30</td><td>高铁出发（郑州东→衡山西）</td><td>车程约5小时</td><td>G529 07:30-12:30</td></tr>
+                        <tr><td>12:30</td><td>抵达衡山西站</td><td>-</td><td>-</td></tr>
+                        <tr><td>12:45-13:45</td><td>午餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>14:00</td><td>前往衡山景区</td><td>车程较短</td><td>-</td></tr>
+                        <tr><td>14:30-17:30</td><td>游览衡山景区</td><td>南岳衡山，门票120元</td><td>-</td></tr>
+                        <tr><td>18:00</td><td>返回衡山市区</td><td>-</td><td>-</td></tr>
+                        <tr><td>18:30-19:30</td><td>晚餐</td><td>品尝当地特色美食</td><td>-</td></tr>
+                        <tr><td>20:00</td><td>入住衡山酒店</td><td>推荐南岳衡山景区附近酒店</td><td>-</td></tr>
+                        <tr><td>21:00</td><td>休息，整理照片</td><td>-</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D8 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D8 - 7月12日（周五）：衡山 → 泰安</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06:30</td><td>起床，酒店早餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:00</td><td>退房，整理行李</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:30</td><td>前往衡山西站</td><td>-</td><td>-</td></tr>
+                        <tr><td>08:27</td><td>高铁出发（衡山西→合肥南）</td><td>G1554</td><td>08:27-12:37</td></tr>
+                        <tr><td>12:37-13:31</td><td>合肥南站换乘</td><td>换乘时间54分钟</td><td>-</td></tr>
+                        <tr><td>13:31</td><td>高铁出发（合肥南→泰安）</td><td>G2564</td><td>13:31-15:48</td></tr>
+                        <tr><td>15:48</td><td>抵达泰安站</td><td>全程7小时21分钟</td><td>-</td></tr>
+                        <tr><td>16:15-16:45</td><td>入住泰山脚下酒店</td><td>推荐泰山景区附近酒店</td><td>-</td></tr>
+                        <tr><td>17:00-19:00</td><td>游览岱庙</td><td>门票30元，中国五岳庙宇之首，国家5A级景区</td><td>-</td></tr>
+                        <tr><td>19:00-20:00</td><td>晚餐</td><td>品尝泰安特色美食，如泰山煎饼、泰山豆腐等</td><td>-</td></tr>
+                        <tr><td>20:30</td><td>返回酒店</td><td>-</td><td>-</td></tr>
+                        <tr><td>21:00</td><td>休息，整理照片，为明天登泰山做准备</td><td>-</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D9 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D9 - 7月13日（周六）：泰山一日游</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>交通信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06:00</td><td>起床，酒店早餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:00</td><td>前往泰山景区</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:30-11:30</td><td>登山游览泰山</td><td>门票115元，红门路线</td><td>-</td></tr>
+                        <tr><td>11:30-12:30</td><td>山顶午餐</td><td>-</td><td>-</td></tr>
+                        <tr><td>12:30-14:30</td><td>游览泰山各景点</td><td>天街、碧霞祠等</td><td>-</td></tr>
+                        <tr><td>14:30-16:00</td><td>下山</td><td>可选择索道下山</td><td>-</td></tr>
+                        <tr><td>16:30-17:30</td><td>返回酒店休息</td><td>-</td><td>-</td></tr>
+                        <tr><td>18:00-19:00</td><td>晚餐</td><td>品尝泰安特色美食</td><td>-</td></tr>
+                        <tr><td>19:30-20:30</td><td>泰安市区夜游</td><td>可选</td><td>-</td></tr>
+                        <tr><td>21:00</td><td>返回酒店</td><td>-</td><td>-</td></tr>
+                        <tr><td>22:00</td><td>就寝</td><td>-</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- D10 详细行程 -->
+            <div class="day-schedule">
+                <div class="day-header">D10 - 7月14日（周日）：泰安 → 北京</div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>行程安排</th>
+                            <th>备注</th>
+                            <th>高铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06:00</td><td>起床，酒店早餐</td><td>五岳征程最后一天</td><td>-</td></tr>
+                        <tr><td>06:30-07:30</td><td>酒店休息，整理行李</td><td>-</td><td>-</td></tr>
+                        <tr><td>07:30-08:00</td><td>退房</td><td>-</td><td>-</td></tr>
+                        <tr><td>08:00-08:30</td><td>前往泰安站</td><td>-</td><td>-</td></tr>
+                        <tr><td>08:30-09:00</td><td>办理进站手续</td><td>-</td><td>-</td></tr>
+                        <tr><td>09:24</td><td>高铁出发（泰安→北京南）</td><td>G1566次列车，车程约2小时6分钟</td><td>09:24-11:30</td></tr>
+                        <tr><td>11:30</td><td>抵达北京南站</td><td>-</td><td>-</td></tr>
+                        <tr><td>12:00-13:00</td><td>午餐</td><td>北京南站附近</td><td>-</td></tr>
+                        <tr><td>13:30</td><td>返回各自家中</td><td>五岳征程圆满结束</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span> 费用预算（两人总计）</h2>
+            <div class="budget-section">
+                <div class="budget-card">
+                    <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 1 8 1 4-1 4-1"/><line x1="4" y1="22" x2="4" y2="15"/><line x1="20" y1="22" x2="20" y2="15"/><path d="M4 12V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6"/><rect x="6" y="10" width="12" height="2" rx="1"/></svg></span> 交通费用</h3>
+                    <div class="amount">¥3,400</div>
+                    <small>高铁票 + 大巴 + 当地交通<br>（含学生票优惠）</small>
+                </div>
+                <div class="budget-card">
+                    <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span> 住宿费用</h3>
+                    <div class="amount">¥4,000</div>
+                    <small>10晚住宿<br>（200元/晚×2人）</small>
+                </div>
+                <div class="budget-card">
+                    <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3"/><path d="M2 9v10a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9"/><path d="M10 12h4"/></svg></span> 门票费用</h3>
+                    <div class="amount">¥2,200</div>
+                    <small>景区门票（含嵩阳书院、中岳庙、岱庙）<br>（含学生票优惠）</small>
+                </div>
+                <div class="budget-card">
+                    <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span> 餐饮费用</h3>
+                    <div class="amount">¥2,000</div>
+                    <small>10天餐饮<br>（100元/天×2人）</small>
+                </div>
+            </div>
+            <div class="total-budget">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span> 总预算</h3>
+                <div class="amount">¥11,600</div>
+                <small>两人十天五岳之旅（含学生票优惠）</small>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h5c1.1 0 2 .9 2 2v5c0 1.1-.9 2-2 2z"/><path d="M9 21H4a2 2 0 0 1-2-2v-5c0-1.1.9-2 2-2h5c1.1 0 2 .9 2 2v5c0 1.1-.9 2-2 2z"/><path d="M20 11h-5c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h5c1.1 0 2 .9 2 2v5c0 1.1-.9 2-2 2z"/><path d="M20 21h-5c-1.1 0-2-.9-2-2v-5c0-1.1.9-2 2-2h5c1.1 0 2 .9 2 2v5c0 1.1-.9 2-2 2z"/></svg></span> 出行准备清单</h2>
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> 交通预订</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket1" checked>
+                    <label for="ticket1">北京北-大同南高铁票 G2455次 (7月5日 08:06-09:56) - 已定票，2人共325元（沈飞、沈月恒）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket1b" checked>
+                    <label for="ticket1b">应县西-太原南高铁票 D1129次 (7月6日 20:16-22:15) - 已定票 (86元×2=176元)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket2">
+                    <label for="ticket2">预订太原南-西安北高铁票 D2565次 (7月7日 14:40-17:35) - 最早预订：6月22日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket3" checked>
+                    <label for="ticket3">预订西安北-华山北高铁票 G2832次 (7月7日 17:53-18:29) - 已定票 (52元×2=104元)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket4">
+                    <label for="ticket4">预订华山北-郑州东高铁票 G1712次 (7月9日 08:57-10:29) - 最早预订：6月24日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="bus1">
+                    <label for="bus1">预订郑州东站-登封大巴票 (7月10日) - 最早预订：7月10日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="bus2">
+                    <label for="bus2">预订登封-郑州东站大巴票 (7月12日) - 最早预订：7月12日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket5">
+                    <label for="ticket5">预订郑州东-衡山西高铁票 G529次 (7月11日 07:30-12:30) - 最早预订：6月26日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket6a">
+                    <label for="ticket6a">预订衡山西-合肥南高铁票 G1554次 (7月12日 08:27-12:37) - 最早预订：6月27日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket6b">
+                    <label for="ticket6b">预订合肥南-泰安高铁票 G2564次 (7月12日 13:31-15:48) - 最早预订：6月27日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket7">
+                    <label for="ticket7">预订泰安-北京南高铁票 G1566次 (7月14日 09:24-11:30) - 最早预订：6月29日</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M1 21h22"/><path d="M8 9h1v1H8z"/><path d="M8 13h1v1H8z"/><path d="M8 17h1v1H8z"/><path d="M15 9h1v1h-1z"/><path d="M15 13h1v1h-1z"/><path d="M15 17h1v1h-1z"/></svg></span> 住宿预订</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel1">
+                    <label for="hotel1">预订大同酒店 (7月5日) - 最早预订：即日起</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel2">
+                    <label for="hotel2">预订太原酒店 (7月6日) - 最早预订：即日起</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel3">
+                    <label for="hotel3">预订华山酒店 (7月7-8日) - 最早预订：即日起</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel4">
+                    <label for="hotel4">预订登封酒店 (7月9日) - 最早预订：即日起</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel5">
+                    <label for="hotel5">预订郑州酒店 (7月10日) - 最早预订：即日起</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel6">
+                    <label for="hotel6">预订衡山酒店 (7月11日) - 最早预订：即日起</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="hotel7">
+                    <label for="hotel7">预订泰安酒店 (7月12-13日) - 最早预订：即日起</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v8H4v-8"/><path d="M2 8h20"/><path d="M12 2v4"/><path d="M18 2v4"/><path d="M6 2v4"/><path d="M4 12v8"/><path d="M20 12v8"/><path d="M12 12v8"/></svg></span> 景点门票</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic1" checked>
+                    <label for="scenic1">云冈石窟门票 (7月5日 15:30-18:00) - 成人票 120元（沈飞）、儿童票 60元（沈月恒） - 最早预订：7月3日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic2">
+                    <label for="scenic2">大同市博物馆门票 (7月5日 10:40-12:10) - 免费 - 最早预订：6月29日可预订7月5日的票</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic3">
+                    <label for="scenic3">华严寺门票 (7月5日 13:30-15:00) - 40元/人 - 最早预订：6月29日可预订7月5日的票</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic4" checked>
+                    <label for="scenic4">悬空寺门票 (7月6日 09:00-10:30) - 成人票 130元×2（沈飞、沈月恒） - 最早预订：7月4日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic5">
+                    <label for="scenic5">恒山门票 (7月6日 10:00-13:00) - 55元/人 - 最早预订：7月4日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic6">
+                    <label for="scenic6">华山门票 (7月8日 08:30-17:30) - 180元/人 - 最早预订：6月29日 (备注：徒步上山+西峰索道+西峰索道大巴)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic7">
+                    <label for="scenic7">少林寺门票 (7月10日 07:30-10:00) - 80元/人 - 最早预订：7月8日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic8">
+                    <label for="scenic8">嵩阳书院门票 (7月10日 10:15-11:30) - 30元/人 - 最早预订：7月8日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic9">
+                    <label for="scenic9">中岳庙门票 (7月10日 12:45-14:15) - 30元/人 - 最早预订：7月8日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic10">
+                    <label for="scenic10">嵩山门票 (7月10日 14:30-16:30) - 80元/人 - 最早预订：7月8日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic11">
+                    <label for="scenic11">衡山门票 (7月11日 14:30-17:30) - 120元/人 - 最早预订：7月9日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic12">
+                    <label for="scenic12">岱庙门票 (7月12日 17:00-19:00) - 30元/人 - 最早预订：7月10日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic13">
+                    <label for="scenic13">泰山门票 (7月13日 07:30-16:00) - 115元/人 - 最早预订：7月11日</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="scenic14">
+                    <label for="scenic14">晋祠门票 (7月7日 08:30-11:30) - 60元/人 - 最早预订：7月5日</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span> 出行准备清单</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep1">
+                    <label for="prep1">登山鞋 - 防滑耐磨，适合长时间行走</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep2">
+                    <label for="prep2">运动服装 - 速干透气，适合户外活动</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep3">
+                    <label for="prep3">防晒用品 - 防晒霜、遮阳帽、墨镜</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep4">
+                    <label for="prep4">背包 - 轻便耐用，容量适中</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep5">
+                    <label for="prep5">水壶 - 保温杯或运动水壶</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep6">
+                    <label for="prep6">雨具 - 轻便雨衣或折叠雨伞</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep7">
+                    <label for="prep7">保暖衣物 - 薄外套或抓绒衣</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep8">
+                    <label for="prep8">爬山手套 - 防滑耐磨，保护手部</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep9">
+                    <label for="prep9">登山杖 - 辅助攀爬，减轻膝盖负担</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep10">
+                    <label for="prep10">身份证、学生证 - 用于身份验证和门票优惠</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep11">
+                    <label for="prep11">常用药品 - 创可贴、感冒药、消炎药等</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep12">
+                    <label for="prep12">充电宝 - 确保手机等设备电量充足</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> 重要提醒</h2>
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span> 励志目标</h3>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>通过攀登五岳，锻炼身体素质和意志品质</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>体验中华文化，增长见识，开阔眼界</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>培养独立自主能力和团队协作精神</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>建立自信心，为新学期做好准备</span>
+                </div>
+            </div>
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> 装备准备</h3>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+                    <span>登山鞋、运动服装、防晒用品</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                    <span>背包、水壶、雨具、保暖衣物</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span>
+                    <span>爬山手套、登山杖（辅助攀爬）</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                    <span>身份证、学生证（门票优惠）</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
+                    <span>常用药品、充电宝、相机</span>
+                </div>
+            </div>
+            
+
+            <div class="checklist">
+                <h3><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> 安全提醒</h3>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                    <span>登山时注意安全，结伴而行</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 19h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="12" y1="8" x2="12" y2="8"/></svg></span>
+                    <span>关注天气变化，做好防护</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                    <span>保持通讯畅通，及时报告位置</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span>
+                    <span>量力而行，不逞强冒险</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span> 互动功能</h2>
+            <div class="interactive-cards">
+                <div class="interactive-card" onclick="window.location.href='五岳打卡护照.html'" style="cursor: pointer; position: relative;">
+                    <span class="icon-svg" style="font-size: 2em; margin-bottom: 15px; color: var(--primary-color);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg></span>
+                    <h3>五岳打卡护照</h3>
+                    <p>记录每一座山峰的征服足迹，见证青春成长蜕变</p>
+                    <div class="card-buttons">
+                        <a href="五岳打卡护照.html" class="card-button">进入打卡护照 →</a>
+                        <a href="五岳打卡护照.html" class="card-button-secondary">查看详情</a>
+                    </div>
+                </div>
+                <div class="interactive-card" onclick="window.location.href='五岳朋友圈.html'" style="cursor: pointer; position: relative;">
+                    <span class="icon-svg" style="font-size: 2em; margin-bottom: 15px; color: var(--primary-color);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+                    <h3>朋友圈发布攻略</h3>
+                    <p>精心策划的社交媒体分享方案，记录美好时光</p>
+                    <div class="card-buttons">
+                        <a href="五岳朋友圈.html" class="card-button">查看发布攻略 →</a>
+                        <a href="五岳朋友圈.html" class="card-button-secondary">了解更多</a>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .interactive-cards {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 25px;
+                    margin: 30px 0;
+                }
+                .interactive-card {
+                    padding: 30px;
+                    border-radius: var(--radius);
+                    text-align: center;
+                    box-shadow: var(--shadow);
+                    border: var(--border-width) solid var(--border-color);
+                    background-color: var(--card-bg);
+                    transition: all 0.3s ease;
+                    overflow: hidden;
+                }
+                
+                .interactive-card:hover {
+                    transform: translateY(-10px);
+                    box-shadow: var(--shadow-hover);
+                    border-color: var(--primary-color);
+                }
+                
+                .interactive-card::after {
+                    content: "点击查看详情";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: rgba(0, 47, 167, 0.8);
+                    color: white;
+                    padding: 8px 0;
+                    font-size: 14px;
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease;
+                }
+                
+                .interactive-card:hover::after {
+                    transform: translateY(0);
+                }
+                .interactive-card h3 {
+                    margin-bottom: 15px;
+                    color: var(--text-color);
+                }
+                .interactive-card p {
+                    margin-bottom: 20px;
+                    color: var(--text-color);
+                }
+                .card-buttons {
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+                .card-button {
+                    background: var(--primary-color);
+                    color: white;
+                    padding: 12px 25px;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                }
+                .card-button:hover {
+                    background: var(--primary-color-dark, var(--primary-color));
+                    opacity: 0.9;
+                }
+                .card-button-secondary {
+                    background: transparent;
+                    color: var(--primary-color);
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                    border: 2px solid var(--primary-color);
+                }
+                .card-button-secondary:hover {
+                    background: rgba(0, 47, 167, 0.1);
+                    transform: translateY(-2px);
+                }
+            </style>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> 励志寄语</h2>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>"山不在高，有仙则名。" 五岳之行不仅是身体的挑战，更是心灵的洗礼。</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>通过这次"五岳征程·青春无畏"特训营，希望你能体会到坚持的力量，感受到中华文化的博大精深。</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>每一步攀登都是成长，每一次挑战都是收获。</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                    <span>愿你在五岳之巅，看到更广阔的世界，成就更好的自己！
+                    </span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 添加交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化高德地图
+            initMap();
+            
+            // 为复选框添加点击效果
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const label = this.nextElementSibling;
+                    if (this.checked) {
+                        label.style.textDecoration = 'line-through';
+                        label.style.opacity = '0.6';
+                    } else {
+                        label.style.textDecoration = 'none';
+                        label.style.opacity = '1';
+                    }
+                });
+            });
+
+            // 添加滚动动画效果
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+            
+            // 显示/隐藏详细行程
+            const toggleBtn = document.getElementById('toggle-schedule');
+            const hiddenSchedule = document.getElementById('hidden-schedule');
+            
+            if (toggleBtn && hiddenSchedule) {
+                toggleBtn.addEventListener('click', function() {
+                    if (hiddenSchedule.style.display === 'none' || hiddenSchedule.style.display === '') {
+                        hiddenSchedule.style.display = 'block';
+                        this.textContent = '收起详细行程 ▲';
+                    } else {
+                        hiddenSchedule.style.display = 'none';
+                        this.textContent = '展开详细行程 ▼';
+                    }
+                });
+            }
+        });
+        
+        // 初始化高德地图
+        function initMap() {
+            // 检查是否加载了高德地图API
+            if (typeof AMap === 'undefined') {
+                document.getElementById('route-map').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 16px; border-radius: 15px;"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1,6 1,22 8,18 16,22 23,18 23,2 16,6 8,2"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span> 五岳征程路线图<br><small style="font-size: 12px; opacity: 0.8;">（需要配置高德地图API Key以显示真实地图）</small></div>';
+                return;
+            }
+            
+            // 创建地图实例
+            var map = new AMap.Map('route-map', {
+                zoom: 5,
+                center: [108.953098, 34.2778], // 中国中心位置
+                mapStyle: 'amap://styles/blue'
+            });
+            
+            // 五岳坐标（按行程顺序）
+            var mountains = [
+                {name: '恒山', position: [113.7368, 39.6754], color: '#667eea', day: 'D2'},
+                {name: '华山', position: [110.0865, 34.4881], color: '#f093fb', day: 'D4'},
+                {name: '嵩山', position: [113.0317, 34.4840], color: '#4facfe', day: 'D6'},
+                {name: '衡山', position: [112.6555, 27.2540], color: '#43e97b', day: 'D7'},
+                {name: '泰山', position: [117.1264, 36.2530], color: '#fa709a', day: 'D9-D10'}
+            ];
+            
+            // 添加标记点
+            mountains.forEach(function(mountain, index) {
+                var marker = new AMap.Marker({
+                    position: mountain.position,
+                    title: mountain.name,
+                    content: '<div style="background: ' + mountain.color + '; color: white; padding: 8px 12px; border-radius: 20px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); font-size: 14px;">' + mountain.day + '<br>' + mountain.name + '</div>'
+                });
+                
+                marker.setMap(map);
+                
+                // 添加信息窗体
+                var infoWindow = new AMap.InfoWindow({
+                    content: '<div style="padding: 15px; text-align: center;"><h4 style="margin: 0 0 10px 0; color: ' + mountain.color + ';">' + mountain.name + '</h4><p style="margin: 0; color: #666;">五岳征程第' + (index + 1) + '站</p><p style="margin: 5px 0 0 0; font-size: 12px; color: #999;">' + mountain.day + ' 挑战日</p></div>'
+                });
+                
+                marker.on('click', function() {
+                    infoWindow.open(map, marker.getPosition());
+                });
+            });
+            
+            // 绘制路线
+            var path = mountains.map(m => m.position);
+            var polyline = new AMap.Polyline({
+                path: path,
+                strokeColor: '#FF6B6B',
+                strokeWeight: 4,
+                strokeOpacity: 0.8,
+                strokeStyle: 'dashed',
+                lineJoin: 'round'
+            });
+            
+            polyline.setMap(map);
+            
+            // 自适应显示所有标记点
+            map.setFitView(null, false, [50, 50, 50, 50]);
+        }
+    </script>
+</body>
+</html>

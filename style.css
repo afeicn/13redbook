@@ -1,0 +1,520 @@
+:root {
+    --klein-blue: #002FA7;
+    --klein-blue-light: #2046B3;
+    --klein-blue-dark: #001F73;
+    --accent-color: #00E4FF;
+    --text-color: #333;
+    --text-secondary: #666;
+    --text-tertiary: #999;
+    --bg-color: #f5f8ff;
+    --card-bg: #fff;
+    --section-bg: rgba(0, 47, 167, 0.03);
+    --special-gradient: linear-gradient(135deg, var(--klein-blue-light) 0%, var(--accent-color) 100%);
+    --shadow: 0 10px 30px rgba(0, 47, 167, 0.10);
+    --shadow-hover: 0 16px 40px rgba(0, 47, 167, 0.16);
+    --radius: 15px;
+    --font-main: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+body {
+    line-height: 1.7;
+    color: var(--text-color);
+    background: var(--bg-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 20px 40px 20px;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding: 60px 0 80px 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--klein-blue);
+    border-radius: 0 0 30px 30px;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.header-content::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.12) 60%,transparent 100%);
+    z-index: -1;
+}
+
+.header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.12;
+}
+
+.header-bg .grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+.header-bg .circles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.header-bg .circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+}
+
+.circle-1 {
+    width: 320px;
+    height: 320px;
+    top: -100px;
+    right: -60px;
+}
+
+.circle-2 {
+    width: 180px;
+    height: 180px;
+    bottom: -60px;
+    left: 12%;
+}
+
+.header h1 {
+    font-size: 3.2rem;
+    margin-bottom: 18px;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
+    letter-spacing: 1px;
+    opacity: 1;
+}
+
+.header p {
+    font-size: 1.6rem;
+    margin-bottom: 36px;
+    font-weight: 500;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+
+.section {
+    background: var(--card-bg);
+    margin: 30px 0;
+    padding: 36px 28px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.section h2 {
+    color: var(--klein-blue);
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    text-align: center;
+    position: relative;
+    font-weight: 700;
+    padding-bottom: 16px;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* 打卡护照样式 */
+.passport-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px 0;
+    border: 1px solid rgba(0, 47, 167, 0.1);
+}
+
+.passport-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.passport-header h3 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.passport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.passport-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 47, 167, 0.06);
+}
+
+.passport-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--accent-color);
+}
+
+.passport-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.mountain-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: var(--klein-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2em;
+    box-shadow: 0 8px 20px rgba(0, 47, 167, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.mountain-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent 60%);
+}
+
+.mountain-icon .icon-svg {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+}
+
+.passport-card:hover .mountain-icon {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0, 47, 167, 0.25);
+}
+
+.passport-card h4 {
+    color: #667eea;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.location {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.date {
+    color: var(--text-tertiary);
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.stamp-area {
+    background: rgba(245, 248, 255, 0.6);
+    border: 2px dashed rgba(0, 47, 167, 0.15);
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    font-size: 1.2em;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stamp-area:hover {
+    background: rgba(245, 248, 255, 0.9);
+    border-color: var(--klein-blue-light);
+    color: var(--klein-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 47, 167, 0.1);
+}
+
+.stamp-area.stamped {
+    background: var(--klein-blue);
+    color: white;
+    border-color: var(--klein-blue-light);
+    border-style: solid;
+}
+
+.challenge {
+    background: var(--section-bg);
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 24px;
+    font-size: 0.95em;
+    color: var(--text-color);
+    border: 1px solid rgba(0, 47, 167, 0.06);
+    font-weight: bold;
+}
+
+/* 朋友圈攻略样式 */
+.social-plan {
+    display: grid;
+    gap: 25px;
+}
+
+.day-post {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 47, 167, 0.1);
+}
+
+.day-post.special-post {
+    background: var(--special-gradient);
+    color: white;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.post-day {
+    background: rgba(0, 47, 167, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: var(--klein-blue);
+    box-shadow: 0 2px 8px rgba(0, 47, 167, 0.08);
+}
+
+.day-post.special-post .post-day {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--klein-blue);
+}
+
+.day-post.special-post .post-title {
+    color: white;
+}
+
+.post-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.day-post:not(.special-post) .post-content {
+    background: rgba(0, 47, 167, 0.03);
+    border: 1px solid rgba(0, 47, 167, 0.08);
+}
+
+.post-images {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    opacity: 0.9;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.day-post:not(.special-post) .post-images {
+    background: rgba(0, 47, 167, 0.05);
+}
+
+.post-text {
+    line-height: 1.8;
+}
+
+.post-text strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+
+.day-post:not(.special-post) .post-text strong {
+    color: var(--klein-blue);
+}
+
+.icon-svg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.icon-svg svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    stroke: white;
+}
+
+/* 导航按钮 */
+.nav-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.9);
+    color: var(--klein-blue);
+    padding: 14px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 47, 167, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    letter-spacing: 0.5px;
+    font-size: 1.05em;
+}
+
+.nav-button:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 47, 167, 0.25);
+}
+
+/* 底部返回按钮 */
+.bottom-nav-button {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.9);
+    color: var(--klein-blue);
+    padding: 14px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 47, 167, 0.15);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    font-size: 1.05em;
+    text-align: center;
+    z-index: 1000;
+}
+
+.bottom-nav-button:hover {
+    background: white;
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 47, 167, 0.25);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px 32px 16px;
+    }
+    
+    .header {
+        padding: 40px 0 60px 0;
+    }
+    
+    .header h1 {
+        font-size: 2.4rem;
+    }
+    
+    .header p {
+        font-size: 1.3rem;
+    }
+    
+    .section {
+        padding: 24px 20px;
+        margin: 24px 0;
+    }
+    
+    .passport-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mountain-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2.2em;
+    }
+    
+    .post-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

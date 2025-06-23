@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五岳打卡护照</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --info-color: #9b59b6;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .passport-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .passport-title {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .passport-subtitle {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        .passport-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .passport-info {
+            padding: 20px;
+            border-bottom: 1px dashed #ddd;
+        }
+        .passport-info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .stamp-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .stamp {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eee;
+        }
+        .stamp:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stamp-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stamp-location {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .stamp-date {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        .stamp-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        .stamp-button {
+            background-color: var(--light-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .stamp-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .stamped {
+            position: relative;
+        }
+        .stamped::after {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--success-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .stamped .stamp-button {
+            background-color: var(--success-color);
+            color: white;
+        }
+        .motivation {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+        }
+        .motivation h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .motivation p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .bottom-nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .bottom-nav-button:hover {
+            background-color: #2980b9;
+        }
+        .icon-svg {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+        .stamp .icon-svg {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 10px;
+        }
+        .stamp:nth-child(1) .icon-svg svg {
+            stroke: #f1c40f;
+        }
+        .stamp:nth-child(2) .icon-svg svg {
+            stroke: #e74c3c;
+        }
+        .stamp:nth-child(3) .icon-svg svg {
+            stroke: #27ae60;
+        }
+        .stamp:nth-child(4) .icon-svg svg {
+            stroke: #3498db;
+        }
+        .stamp:nth-child(5) .icon-svg svg {
+            stroke: #9b59b6;
+        }
+        .stamp:nth-child(1) {
+            border-top: 4px solid #f1c40f;
+        }
+        .stamp:nth-child(2) {
+            border-top: 4px solid #e74c3c;
+        }
+        .stamp:nth-child(3) {
+            border-top: 4px solid #27ae60;
+        }
+        .stamp:nth-child(4) {
+            border-top: 4px solid #3498db;
+        }
+        .stamp:nth-child(5) {
+            border-top: 4px solid #9b59b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="passport-header">
+            <h1 class="passport-title">五岳打卡护照</h1>
+            <p class="passport-subtitle">记录你的五岳征程，收集每座山的印章</p>
+        </div>
+
+        <div class="passport-card">
+            <div class="passport-info">
+                <p><strong>护照持有者：</strong>沈飞</p>
+                <p><strong>挑战开始：</strong>2023年7月5日</p>
+                <p><strong>预计完成：</strong>2023年7月14日</p>
+                <p><strong>挑战目标：</strong>征服中国五岳，收集五座名山印章</p>
+            </div>
+            
+            <div class="stamp-area">
+                <!-- 北岳恒山 -->
+                <div class="stamp" id="hengshan-north">
+                    <div>
+                        <span class="icon-svg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 21l4-9 4 9"/>
+                                <path d="M12 12V3"/>
+                                <path d="M5 8l7-5 7 5"/>
+                            </svg>
+                        </span>
+                        <div class="stamp-title">北岳恒山</div>
+                        <div class="stamp-location">山西省浑源县</div>
+                        <div class="stamp-date">7月6日</div>
+                    </div>
+                    <button class="stamp-button" onclick="checkIn('hengshan-north')">点击打卡</button>
+                </div>
+                
+                <!-- 西岳华山 -->
+                <div class="stamp" id="huashan">
+                    <div>
+                        <span class="icon-svg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 21l2-8 4-2 4 2 2 8"/>
+                                <path d="M12 11l-1-3 1-2 1 2-1 3"/>
+                                <path d="M9 13l-1-2 1-1 1 1-1 2"/>
+                                <path d="M15 13l1-2-1-1-1 1 1 2"/>
+                            </svg>
+                        </span>
+                        <div class="stamp-title">西岳华山</div>
+                        <div class="stamp-location">陕西省华阴市</div>
+                        <div class="stamp-date">7月8日</div>
+                    </div>
+                    <button class="stamp-button" onclick="checkIn('huashan')">点击打卡</button>
+                </div>
+                
+                <!-- 中岳嵩山 -->
+                <div class="stamp" id="songshan">
+                    <div>
+                        <span class="icon-svg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 21l3-4 2-1 2 1 3 4"/>
+                                <path d="M12 16v-6"/>
+                                <path d="M9 12h6"/>
+                                <path d="M9 9h6"/>
+                                <path d="M10 6h4"/>
+                                <path d="M12 3v3"/>
+                            </svg>
+                        </span>
+                        <div class="stamp-title">中岳嵩山</div>
+                        <div class="stamp-location">河南省登封市</div>
+                        <div class="stamp-date">7月10日</div>
+                    </div>
+                    <button class="stamp-button" onclick="checkIn('songshan')">点击打卡</button>
+                </div>
+                
+                <!-- 南岳衡山 -->
+                <div class="stamp" id="hengshan-south">
+                    <div>
+                        <span class="icon-svg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 21l3-6 2 1 3-8 3 8 2-1 3 6"/>
+                                <circle cx="12" cy="8" r="1.5"/>
+                                <path d="M12 3v2"/>
+                                <path d="M9 5l3-2 3 2"/>
+                            </svg>
+                        </span>
+                        <div class="stamp-title">南岳衡山</div>
+                        <div class="stamp-location">湖南省衡阳市</div>
+                        <div class="stamp-date">7月11日</div>
+                    </div>
+                    <button class="stamp-button" onclick="checkIn('hengshan-south')">点击打卡</button>
+                </div>
+                
+                <!-- 东岳泰山 -->
+                <div class="stamp" id="taishan">
+                    <div>
+                        <span class="icon-svg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 21l3-7 4-11 4 11 3 7"/>
+                                <path d="M8 21h8"/>
+                                <path d="M10 14h4"/>
+                                <path d="M11 10h2"/>
+                                <path d="M12 3l-1 2 1 1 1-1-1-2"/>
+                            </svg>
+                        </span>
+                        <div class="stamp-title">东岳泰山</div>
+                        <div class="stamp-location">山东省泰安市</div>
+                        <div class="stamp-date">7月13日</div>
+                    </div>
+                    <button class="stamp-button" onclick="checkIn('taishan')">点击打卡</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21l4-10 4-8 4 8 4 10"/><path d="M6 21h12"/><path d="M8 16h8"/><path d="M10 11h4"/><path d="M12 3v3"/></svg></span> 励志寄语</h2>
+            <div class="motivation" style="text-align: center; font-size: 1.2em; line-height: 2; color: var(--text-secondary); background: var(--section-bg); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow);">
+                "山不在高，有仙则名。" 五岳之行不仅是身体的挑战，更是心灵的洗礼。<br>
+                通过这次"五岳征程·青春无畏"特训营，希望你能体会到坚持的力量，感受到中华文化的博大精深。<br>
+                每一步攀登都是成长，每一次挑战都是收获。<br>
+                愿你在五岳之巅，看到更广阔的世界，成就更好的自己！
+                <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21l4-10 4-8 4 8 4 10"/><path d="M6 21h12"/><path d="M8 16h8"/><path d="M10 11h4"/><path d="M12 3v3"/></svg></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 打卡功能
+        function toggleStamp(element) {
+            if (element.classList.contains('stamped')) {
+                element.classList.remove('stamped');
+                element.innerHTML = '<span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg></span>点击打卡';
+            } else {
+                element.classList.add('stamped');
+                element.innerHTML = '<span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>已打卡完成';
+                
+                // 添加打卡动画效果
+                element.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.passport-card, .day-post');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+    
+    <a href="五岳十日游行程网页.html" class="bottom-nav-button">← 返回行程页面</a>
+</body>
+</html>

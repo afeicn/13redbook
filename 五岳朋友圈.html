@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五岳征程·朋友圈分享</title>
+    <style>
+        :root {
+            --klein-blue: #002FA7;
+            --klein-blue-light: #2046B3;
+            --klein-blue-dark: #001F73;
+            --accent-color: #00E4FF;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --card-bg: #fff;
+            --section-bg: rgba(0, 47, 167, 0.03);
+            --shadow: 0 10px 30px rgba(0, 47, 167, 0.10);
+            --shadow-hover: 0 16px 40px rgba(0, 47, 167, 0.16);
+            --radius: 15px;
+            --font-main: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 40px 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-dark));
+            color: white;
+            padding: 60px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+            margin: -32px -20px 40px -20px;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 24px;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.12;
+        }
+        .header-bg .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .header-bg .circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .header-bg .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .circle-1 {
+            width: 320px;
+            height: 320px;
+            top: -100px;
+            right: -60px;
+        }
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            bottom: -60px;
+            left: 12%;
+        }
+        .title-main {
+            color: #fff;
+            font-size: 3.2rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .title-sub {
+            color: #f0f4ff;
+            font-size: 1.6rem;
+            margin-bottom: 36px;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+        .icon-svg {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+        }
+        .icon-svg svg {
+            width: 100%;
+            height: 100%;
+            stroke: currentColor;
+        }
+        .section {
+            background: var(--section-bg);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            margin-bottom: 36px;
+            text-align: center;
+        }
+        h2 {
+            color: var(--klein-blue-light);
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background-color: var(--accent-color);
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+        .social-plan {
+            position: relative;
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, 
+                var(--klein-blue) 20%, 
+                #e74c3c 20%, #e74c3c 40%, 
+                #27ae60 40%, #27ae60 60%, 
+                #f39c12 60%, #f39c12 80%, 
+                #8e44ad 80%, #8e44ad 100%);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .day-post {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .day-post:hover {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
+        }
+        .post-header {
+            background: var(--section-bg);
+            padding: 18px 24px;
+            border-bottom: 1px solid rgba(0, 47, 167, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .post-content {
+            padding: 24px;
+        }
+        .post-text {
+            line-height: 1.8;
+            color: var(--text-color);
+            text-align: left;
+        }
+        .post-text > div {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .post-text > div:last-child {
+            margin-bottom: 0;
+        }
+        .post-text .hashtags {
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        .post-text .location {
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        .special-post {
+            background: linear-gradient(135deg, var(--section-bg) 0%, rgba(0, 47, 167, 0.06) 100%);
+            border: 2px solid var(--klein-blue-light);
+            box-shadow: var(--shadow-hover);
+        }
+        .special-post .post-header {
+            background: var(--klein-blue);
+            color: white;
+            padding: 20px 24px;
+        }
+        .bottom-nav-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--klein-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-weight: 600;
+        }
+        .bottom-nav-button:hover {
+            background: var(--klein-blue-dark);
+            box-shadow: var(--shadow-hover);
+        }
+        .mountain-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        .mountain-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+        .location-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+        .location-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+        .star-icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin-right: 6px;
+        }
+        .star-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+        @media (max-width: 900px) {
+            .container {
+                padding: 12px;
+            }
+            .section, .day-post {
+                padding: 18px;
+            }
+            .title-main {
+                font-size: 2.4rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-bg">
+            <div class="grid"></div>
+            <div class="circles">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+            </div>
+        </div>
+        <div class="header-content">
+            <h1 class="title-main">
+                <span class="icon-svg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                </span>
+                五岳巡礼·心境之旅
+            </h1>
+            <h2 class="title-sub">以山为师，以行为证，记录灵魂与天地的对话</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>五岳问道·心灵印记分享</h2>
+            <div class="social-plan">
+                <!-- 进度指示器 -->
+                <div class="progress-bar"></div>
+                
+                <div class="day-post">
+                    <div class="post-header">
+                        <div style="display: flex; align-items: center;">
+                            <span class="post-day" style="font-weight: bold; color: var(--klein-blue);">7月6日</span>
+                            <span style="margin: 0 8px; color: var(--klein-blue);">•</span>
+                            <span style="background: var(--klein-blue); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em;">1/5 开始</span>
+                            <span class="post-title" style="font-size: 1.1em; color: var(--text-color); margin-left: 8px;">Heng Shan 山西·北岳·恒山</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <div>
+                                <span class="mountain-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22l-9-12z"/>
+                                    </svg>
+                                </span>
+                                Heng Shan 山西·北岳·恒山：北岳巍峨，悬空寺凌云而立。初登五岳，便感天地之浩渺，心境为之一振。恒山者，恒久不变之道也。
+                            </div>
+                            <div class="hashtags" style="color: var(--klein-blue);">#北岳问道 #悬空禅境 #天地初心</div>
+                            <div class="location">
+                                <span class="location-icon" style="color: var(--klein-blue);">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </span>
+                                <span>大同市·恒山风景名胜区·天峰岭</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-post">
+                    <div class="post-header">
+                        <div style="display: flex; align-items: center;">
+                            <span class="post-day" style="font-weight: bold; color: #e74c3c;">7月8日</span>
+                            <span style="margin: 0 8px; color: #e74c3c;">•</span>
+                            <span style="background: #e74c3c; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em;">2/5 继续</span>
+                            <span class="post-title" style="font-size: 1.1em; color: var(--text-color); margin-left: 8px;">Hua Shan 陕西·西岳·华山</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <div>
+                                <span class="mountain-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22l-9-12z"/>
+                                    </svg>
+                                </span>
+                                Hua Shan 陕西·西岳·华山：西岳华山，自古华山一条路。登临绝顶，俯瞰苍茫，方知何谓"华山论剑"之境界。险峻中见风骨，峭壁上悟人生。
+                            </div>
+                            <div class="hashtags" style="color: #e74c3c;">#西岳论道 #绝顶风骨 #险峻人生</div>
+                            <div class="location">
+                                <span class="location-icon" style="color: #e74c3c;">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </span>
+                                <span>渭南市·华山风景名胜区</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-post">
+                    <div class="post-header">
+                        <div style="display: flex; align-items: center;">
+                            <span class="post-day" style="font-weight: bold; color: #27ae60;">7月10日</span>
+                            <span style="margin: 0 8px; color: #27ae60;">•</span>
+                            <span style="background: #27ae60; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em;">3/5 过半</span>
+                            <span class="post-title" style="font-size: 1.1em; color: var(--text-color); margin-left: 8px;">Song Shan 河南·中岳·嵩山</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <div>
+                                <span class="mountain-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22l-9-12z"/>
+                                    </svg>
+                                </span>
+                                Song Shan 河南·中岳·嵩山：中岳嵩山，禅宗祖庭。书册崖层峦叠嶂如天然经卷，少林古刹钟声悠扬。在这里，山是经，石是书，每一步都是禅悟。
+                            </div>
+                            <div class="hashtags" style="color: #27ae60;">#中岳禅心 #书册天成 #古刹悟道</div>
+                            <div class="location">
+                                <span class="location-icon" style="color: #27ae60;">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </span>
+                                <span>郑州市·嵩山风景名胜区-嵩顶</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-post">
+                    <div class="post-header">
+                        <div style="display: flex; align-items: center;">
+                            <span class="post-day" style="font-weight: bold; color: #f39c12;">7月11日</span>
+                            <span style="margin: 0 8px; color: #f39c12;">•</span>
+                            <span style="background: #f39c12; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em;">4/5 接近终点</span>
+                            <span class="post-title" style="font-size: 1.1em; color: var(--text-color); margin-left: 8px;">Heng Shan 湖南·南岳·衡山</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <div>
+                                <span class="mountain-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22l-9-12z"/>
+                                    </svg>
+                                </span>
+                                Heng Shan 湖南·南岳·衡山：南岳衡山，秀冠五岳。祝融峰上观日出，云海翻腾如诗如画。"衡山峻极于天下兮，怀其南薰之德馨"，此山此景，诗意天成。
+                            </div>
+                            <div class="hashtags" style="color: #f39c12;">#南岳诗韵 #祝融观日 #云海仙境</div>
+                            <div class="location">
+                                <span class="location-icon" style="color: #f39c12;">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </span>
+                                <span>衡阳市·南岳衡山风景区</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-post">
+                    <div class="post-header">
+                        <div style="display: flex; align-items: center;">
+                            <span class="post-day" style="font-weight: bold; color: #8e44ad;">7月13日</span>
+                            <span style="margin: 0 8px; color: #8e44ad;">•</span>
+                            <span style="background: #8e44ad; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em;">5/5 完成</span>
+                            <span class="post-title" style="font-size: 1.1em; color: var(--text-color); margin-left: 8px;">Tai Shan 山东·东岳·泰山</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <div>
+                                <span class="mountain-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22l-9-12z"/>
+                                    </svg>
+                                </span>
+                                Tai Shan 山东·东岳·泰山：东岳泰山，五岳独尊。"会当凌绝顶，一览众山小"，登临玉皇顶，天下尽在足下。泰山者，稳如磐石，重如泰山，乃天地之脊梁也。
+                            </div>
+                            <div class="hashtags" style="color: #8e44ad;">#东岳独尊 #凌绝天下 #泰山北斗</div>
+                            <div class="location">
+                                <span class="location-icon" style="color: #8e44ad;">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </span>
+                                <span>泰安市·泰山风景名胜区</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-post special-post">
+                    <div class="post-header">
+                        <div style="display: flex; align-items: center;">
+                            <span class="post-day" style="font-weight: bold; color: #d4af37;">8月5日</span>
+                            <span style="margin: 0 8px; color: #d4af37;">•</span>
+                            <span style="background: linear-gradient(45deg, #d4af37, #ffd700); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em;">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 12px; height: 12px; display: inline-block; margin-right: 4px;">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                                功德圆满
+                            </span>
+                            <span class="post-title" style="font-size: 1.1em; color: var(--text-color); margin-left: 8px;">五岳问道·心境升华·功德圆满</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <div>
+                                <span class="mountain-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22l-9-12z"/>
+                                    </svg>
+                                </span>
+                                五岳朝圣之旅圆满落幕。从北岳恒山的雄浑壮阔，到西岳华山的险峻峭拔；从中岳嵩山的禅意深远，到南岳衡山的秀美灵动；最终在东岳泰山的庄严神圣中达到心境的升华。
+                            </div>
+                            <div>
+                                <span class="star-icon" style="color: #d4af37;">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </span>
+                                每一座山峰都是一次心灵的洗礼，每一次攀登都是对自我的超越。五岳归来不看山，此行不仅是对祖国大好河山的礼赞，更是一次精神境界的提升。
+                            </div>
+                            <div class="hashtags" style="color: #d4af37;">#五岳朝圣 #心境升华 #功德圆满 #山水有情 #道法自然</div>
+                            <div class="location">
+                                <span class="star-icon" style="color: #d4af37;">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </span>
+                                <span>中华五岳·天下名山</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const posts = document.querySelectorAll('.day-post');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            posts.forEach(post => {
+                post.style.opacity = '0';
+                post.style.transform = 'translateY(20px)';
+                post.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(post);
+            });
+        });
+    </script>
+    
+    <a href="五岳打卡护照.html" class="bottom-nav-button">← 返回护照页面</a>
+</body>
+</html>
