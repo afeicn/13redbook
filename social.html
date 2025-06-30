@@ -94,7 +94,7 @@
         }
         .title-main {
             color: #fff;
-            font-size: 3.2rem;
+            font-size: 2.8rem;
             margin-bottom: 18px;
             font-weight: 800;
             text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
@@ -106,7 +106,7 @@
         }
         .title-sub {
             color: #f0f4ff;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin-bottom: 36px;
             font-weight: 500;
             max-width: 700px;
@@ -122,7 +122,9 @@
         .icon-svg svg {
             width: 100%;
             height: 100%;
-            stroke: currentColor;
+            stroke: var(--klein-blue);
+            fill: var(--klein-blue);
+            stroke-width: 2;
         }
         .section {
             background: var(--section-bg);
@@ -134,7 +136,7 @@
         h2 {
             color: var(--klein-blue-light);
             font-weight: 600;
-            font-size: 2rem;
+            font-size: 1.7rem;
             margin-bottom: 18px;
             display: flex;
             align-items: center;
@@ -230,20 +232,22 @@
         .bottom-nav-button {
             position: fixed;
             bottom: 20px;
-            right: 20px;
-            background: var(--klein-blue);
-            color: white;
+            left: 50%;
+            transform: translateX(-50%);
             padding: 12px 24px;
-            border-radius: 30px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-light));
+            color: white;
             text-decoration: none;
-            box-shadow: var(--shadow);
+            border-radius: var(--radius);
             transition: all 0.3s ease;
-            z-index: 100;
             font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 100;
         }
         .bottom-nav-button:hover {
-            background: var(--klein-blue-dark);
+            transform: translateX(-50%);
             box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--klein-blue-dark), var(--klein-blue));
         }
         .mountain-icon {
             display: inline-block;
@@ -254,7 +258,7 @@
         .mountain-icon svg {
             width: 100%;
             height: 100%;
-            fill: currentColor;
+            fill: var(--klein-blue);
         }
         .location-icon {
             display: inline-block;
@@ -265,7 +269,7 @@
         .location-icon svg {
             width: 100%;
             height: 100%;
-            fill: currentColor;
+            fill: var(--klein-blue-light);
         }
         .star-icon {
             display: inline-block;
@@ -276,7 +280,7 @@
         .star-icon svg {
             width: 100%;
             height: 100%;
-            fill: currentColor;
+            fill: var(--accent-color);
         }
         @media (max-width: 900px) {
             .container {
@@ -553,6 +557,6 @@
         });
     </script>
     
-    <a href="passport.html" class="bottom-nav-button">← 返回护照页面</a>
+    <a href="index.html" class="bottom-nav-button">← 返回行程页面</a>
 </body>
 </html>

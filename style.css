@@ -518,3 +518,29 @@ body {
         gap: 10px;
     }
 }
+
+/* 详细行程安排现在使用budget样式，无需额外CSS */
+
+.day-summary {
+    color: var(--text-color);
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.day-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.highlight-tag {
+    background: rgba(0, 47, 167, 0.1);
+    color: var(--klein-blue);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* 详细行程安排响应式样式已移除，使用budget样式的响应式设计 */

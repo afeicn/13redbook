@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D2 - 7月6日：悬空寺 → 恒山 → 应县西 → 太原</title>
+    <style>
+        :root {
+            --klein-blue: #002FA7;
+            --klein-blue-light: #2046B3;
+            --klein-blue-dark: #001F73;
+            --accent-color: #00E4FF;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --card-bg: #fff;
+            --section-bg: rgba(0, 47, 167, 0.03);
+            --shadow: 0 10px 30px rgba(0, 47, 167, 0.10);
+            --shadow-hover: 0 16px 40px rgba(0, 47, 167, 0.16);
+            --radius: 15px;
+            --font-main: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-dark));
+            color: white;
+            padding: 60px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 24px;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.12;
+        }
+        .header-bg .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .header-bg .circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .header-bg .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .circle-1 {
+            width: 320px;
+            height: 320px;
+            top: -100px;
+            right: -60px;
+        }
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            bottom: -60px;
+            left: 12%;
+        }
+        .title-main {
+            color: #fff;
+            font-size: 3.2rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
+            letter-spacing: 1px;
+        }
+        .title-sub {
+            color: #f0f4ff;
+            font-size: 1.6rem;
+            margin-bottom: 36px;
+            font-weight: 500;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-light));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+        .back-btn:hover {
+            transform: translateX(-50%);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--klein-blue-dark), var(--klein-blue));
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 40px 20px;
+        }
+        .day-schedule {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 36px 28px;
+            margin-bottom: 36px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .day-schedule:hover {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
+        }
+        .day-header {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--klein-blue-light);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+        }
+        .day-header::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background-color: var(--accent-color);
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .schedule-table th,
+        .schedule-table td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+        .schedule-table th {
+            background: var(--klein-blue);
+            color: #fff;
+            font-weight: 600;
+        }
+        .schedule-table tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        .schedule-table td:first-child {
+            font-weight: bold;
+            color: var(--klein-blue);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .day-schedule {
+                padding: 24px 20px;
+            }
+
+            .title-main {
+                font-size: 2.4rem;
+            }
+
+            .day-header {
+                font-size: 1.6rem;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg">
+            <div class="grid"></div>
+            <div class="circles">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+            </div>
+        </div>
+        <div class="header-content">
+            <a href="index.html#detailed-schedule" class="back-btn" onclick="localStorage.setItem('scrollToSchedule', 'true')">← 返回总览</a>
+            <h1 class="title-main">D2 - 7月6日（周日）</h1>
+            <p class="title-sub">悬空寺 → 恒山 → 应县西 → 太原</p>
+        </div>
+    </header>
+    <div class="container">
+
+        <div class="day-schedule">
+            <div class="day-header">D2 - 7月6日（周日）：悬空寺 → 恒山 → 应县西 → 太原</div>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>行程安排</th>
+                        <th>备注</th>
+                        <th>高铁信息</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07:00</td>
+                        <td>酒店早餐</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>07:30</td>
+                        <td>退房，前往悬空寺</td>
+                        <td>车程约1.5小时</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>游览悬空寺</td>
+                        <td>门票130元，游览时间约1.5小时</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:30</td>
+                        <td>前往恒山景区</td>
+                        <td>车程约30分钟</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:00-13:00</td>
+                        <td>登恒山</td>
+                        <td>可选择索道上下山</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>13:00-14:00</td>
+                        <td>山下用午餐</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>15:00</td>
+                        <td>前往应县西站</td>
+                        <td>车程约1小时</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>16:00</td>
+                        <td>抵达应县西站</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>20:16</td>
+                        <td>高铁出发（应县西→太原南）</td>
+                        <td>车程约2小时</td>
+                        <td>D1129 20:16-22:15</td>
+                    </tr>
+                    <tr>
+                        <td>22:15</td>
+                        <td>抵达太原南站</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>22:45</td>
+                        <td>前往酒店，办理入住</td>
+                        <td>推荐太原市区酒店</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>23:15-24:00</td>
+                        <td>简单晚餐</td>
+                        <td>酒店附近便利店或24小时餐厅</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>24:00</td>
+                        <td>休息</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

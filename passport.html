@@ -6,49 +6,127 @@
     <title>五岳打卡护照</title>
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #34495e;
-            --success-color: #2ecc71;
-            --warning-color: #f39c12;
-            --info-color: #9b59b6;
+            --klein-blue: #002FA7;
+            --klein-blue-light: #2046B3;
+            --klein-blue-dark: #001F73;
+            --accent-color: #00E4FF;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --card-bg: #fff;
+            --section-bg: rgba(0, 47, 167, 0.03);
+            --shadow: 0 10px 30px rgba(0, 47, 167, 0.10);
+            --shadow-hover: 0 16px 40px rgba(0, 47, 167, 0.16);
+            --radius: 15px;
+            --font-main: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
         }
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: var(--font-main);
+            line-height: 1.7;
+            color: var(--text-color);
+            background: var(--bg-color);
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
-            color: var(--dark-color);
         }
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 32px 20px 40px 20px;
         }
         .passport-header {
-            text-align: center;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-dark));
+            color: white;
+            padding: 60px 0 80px 0;
             position: relative;
+            overflow: hidden;
+            margin: -32px -20px 40px -20px;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 24px;
+        }
+        .header-content::before {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            background: linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.12) 60%,transparent 100%);
+            z-index: -1;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.12;
+        }
+        .header-bg .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .header-bg .circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .header-bg .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .circle-1 {
+            width: 320px;
+            height: 320px;
+            top: -100px;
+            right: -60px;
+        }
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            bottom: -60px;
+            left: 12%;
         }
         .passport-title {
-            font-size: 2.2em;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
+            letter-spacing: 1px;
+            opacity: 1;
         }
         .passport-subtitle {
-            font-size: 1.2em;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
+            color: #f0f4ff;
+            font-size: 1.4rem;
+            margin-bottom: 36px;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 1;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.12);
         }
         .passport-card {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-            margin-bottom: 30px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 36px 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            margin-bottom: 36px;
+        }
+        .passport-card:hover {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
         }
         .passport-info {
             padding: 20px;
@@ -65,25 +143,24 @@
             padding: 20px;
         }
         .stamp {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
-            overflow: hidden;
-            height: 200px;
+            text-align: center;
+            height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 1px solid #eee;
         }
         .stamp:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
         }
         .stamp-title {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -103,7 +180,7 @@
             color: var(--primary-color);
         }
         .stamp-button {
-            background-color: var(--light-color);
+            background-color: var(--klein-blue-light);
             border: none;
             padding: 8px 15px;
             border-radius: 20px;
@@ -111,9 +188,10 @@
             font-weight: bold;
             transition: all 0.3s ease;
             margin-top: 10px;
+            color: white;
         }
         .stamp-button:hover {
-            background-color: var(--primary-color);
+            background-color: var(--klein-blue);
             color: white;
         }
         .stamped {
@@ -136,24 +214,55 @@
             font-size: 0.9em;
         }
         .stamped .stamp-button {
-            background-color: var(--success-color);
-            color: white;
+            background-color: var(--accent-color);
+            color: var(--klein-blue);
+        }
+        .section {
+            background: var(--section-bg);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            margin-bottom: 36px;
+        }
+        .title-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 36px;
+        }
+        .title-bar .accent {
+            width: 8px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 4px;
+            margin-right: 18px;
+        }
+        h2 {
+            color: var(--klein-blue-light);
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background-color: var(--accent-color);
+            margin-right: 15px;
+            border-radius: 4px;
         }
         .motivation {
             text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 10px;
-        }
-        .motivation h3 {
-            margin-top: 0;
-            font-size: 1.5em;
-        }
-        .motivation p {
-            font-size: 1.1em;
-            line-height: 1.6;
+            font-size: 1.2em;
+            line-height: 2;
+            color: var(--text-color);
+            background: var(--section-bg);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
         .bottom-nav {
             display: flex;
@@ -161,16 +270,24 @@
             margin-top: 30px;
         }
         .bottom-nav-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-light));
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 100;
         }
         .bottom-nav-button:hover {
-            background-color: #2980b9;
+            transform: translateX(-50%);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--klein-blue-dark), var(--klein-blue));
         }
         .icon-svg {
             display: inline-block;
@@ -184,19 +301,24 @@
             margin: 0 auto 10px;
         }
         .stamp:nth-child(1) .icon-svg svg {
-            stroke: #f1c40f;
+            stroke: var(--klein-blue);
+            stroke-width: 2.5;
         }
         .stamp:nth-child(2) .icon-svg svg {
-            stroke: #e74c3c;
+            stroke: var(--klein-blue-light);
+            stroke-width: 2.5;
         }
         .stamp:nth-child(3) .icon-svg svg {
-            stroke: #27ae60;
+            stroke: var(--accent-color);
+            stroke-width: 2.5;
         }
         .stamp:nth-child(4) .icon-svg svg {
-            stroke: #3498db;
+            stroke: var(--klein-blue);
+            stroke-width: 2.5;
         }
         .stamp:nth-child(5) .icon-svg svg {
-            stroke: #9b59b6;
+            stroke: var(--klein-blue-light);
+            stroke-width: 2.5;
         }
         .stamp:nth-child(1) {
             border-top: 4px solid #f1c40f;
@@ -213,13 +335,42 @@
         .stamp:nth-child(5) {
             border-top: 4px solid #9b59b6;
         }
+        @media (max-width: 900px) {
+            .container {
+                padding: 12px;
+            }
+            .stamp-area {
+                grid-template-columns: 1fr;
+            }
+            .section, .passport-card, .stamp {
+                padding: 18px 16px;
+            }
+            .passport-title {
+                font-size: 2.2rem;
+            }
+            .passport-subtitle {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="passport-header">
-            <h1 class="passport-title">五岳打卡护照</h1>
-            <p class="passport-subtitle">记录你的五岳征程，收集每座山的印章</p>
+            <div class="header-bg">
+                <div class="grid"></div>
+                <div class="circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <h1 class="passport-title">五岳打卡护照</h1>
+                <p class="passport-subtitle">记录你的五岳征程，收集每座山的印章</p>
+            </div>
         </div>
 
         <div class="passport-card">
@@ -326,13 +477,12 @@
         </div>
 
         <div class="section">
-            <h2><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21l4-10 4-8 4 8 4 10"/><path d="M6 21h12"/><path d="M8 16h8"/><path d="M10 11h4"/><path d="M12 3v3"/></svg></span> 励志寄语</h2>
-            <div class="motivation" style="text-align: center; font-size: 1.2em; line-height: 2; color: var(--text-secondary); background: var(--section-bg); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow);">
+            <h2>励志寄语</h2>
+            <div class="motivation">
                 "山不在高，有仙则名。" 五岳之行不仅是身体的挑战，更是心灵的洗礼。<br>
                 通过这次"五岳征程·青春无畏"特训营，希望你能体会到坚持的力量，感受到中华文化的博大精深。<br>
                 每一步攀登都是成长，每一次挑战都是收获。<br>
                 愿你在五岳之巅，看到更广阔的世界，成就更好的自己！
-                <span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21l4-10 4-8 4 8 4 10"/><path d="M6 21h12"/><path d="M8 16h8"/><path d="M10 11h4"/><path d="M12 3v3"/></svg></span>
             </div>
         </div>
     </div>
