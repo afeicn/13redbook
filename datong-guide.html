@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大同旅游攻略</title>
+    <style>
+        :root {
+            --klein-blue: #002FA7;
+            --klein-blue-light: #2046B3;
+            --klein-blue-dark: #001F73;
+            --accent-color: #00E4FF;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --card-bg: #fff;
+            --section-bg: rgba(0, 47, 167, 0.03);
+            --shadow: 0 10px 30px rgba(0, 47, 167, 0.10);
+            --shadow-hover: 0 16px 40px rgba(0, 47, 167, 0.16);
+            --radius: 15px;
+            --font-main: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        body {
+            font-family: var(--font-main);
+            line-height: 1.7;
+            color: var(--text-color);
+            background: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 40px 20px;
+        }
+        .guide-header {
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-dark));
+            color: white;
+            padding: 60px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+            margin: -32px -20px 40px -20px;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 24px;
+        }
+        .header-content::before {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            background: linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.12) 60%,transparent 100%);
+            z-index: -1;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.12;
+        }
+        .header-bg .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .header-bg .circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .header-bg .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .circle-1 {
+            width: 320px;
+            height: 320px;
+            top: -100px;
+            right: -60px;
+        }
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            bottom: -60px;
+            left: 12%;
+        }
+        .guide-title {
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.10);
+            letter-spacing: 1px;
+            opacity: 1;
+        }
+        .guide-subtitle {
+            color: #f0f4ff;
+            font-size: 1.4rem;
+            margin-bottom: 36px;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 1;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+        .attraction-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 36px 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            margin-bottom: 36px;
+        }
+        .attraction-card:hover {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: var(--shadow-hover);
+        }
+        .attraction-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .attraction-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .attraction-title {
+            color: var(--klein-blue);
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .attraction-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin: 5px 0 0 0;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h3 {
+            color: var(--klein-blue-light);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section h3::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 20px;
+            background-color: var(--accent-color);
+            margin-right: 12px;
+            border-radius: 3px;
+        }
+        .section-content {
+            background: var(--section-bg);
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .highlight-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .highlight-item h4 {
+            color: var(--klein-blue);
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+        .highlight-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .route-steps {
+            counter-reset: step-counter;
+        }
+        .route-step {
+            counter-increment: step-counter;
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--klein-blue);
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .route-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--klein-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .route-step h4 {
+            color: var(--klein-blue);
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+        .route-step p {
+            margin: 0;
+            color: #666;
+        }
+        .tips-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tips-box h4 {
+            color: #856404;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .tips-box h4::before {
+            content: "💡";
+            margin-right: 8px;
+        }
+        .tips-box ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #856404;
+        }
+        .bottom-nav-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--klein-blue), var(--klein-blue-light));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+        .bottom-nav-button:hover {
+            transform: translateX(-50%);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--klein-blue-dark), var(--klein-blue));
+        }
+        @media (max-width: 900px) {
+            .container {
+                padding: 12px;
+            }
+            .attraction-card {
+                padding: 20px 16px;
+            }
+            .guide-title {
+                font-size: 2.2rem;
+            }
+            .guide-subtitle {
+                font-size: 1.2rem;
+            }
+            .attraction-title {
+                font-size: 1.5rem;
+            }
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="guide-header">
+            <div class="header-bg">
+                <div class="grid"></div>
+                <div class="circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <h1 class="guide-title">大同旅游攻略</h1>
+                <p class="guide-subtitle">探索千年古都，感受历史文化的厚重底蕴</p>
+            </div>
+        </div>
+
+        <!-- 大同博物馆 -->
+        <div class="attraction-card">
+            <div class="attraction-header">
+                <div class="attraction-icon">博</div>
+                <div>
+                    <h2 class="attraction-title">大同市博物馆</h2>
+                    <p class="attraction-subtitle">了解大同历史文化的最佳起点</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>景点介绍</h3>
+                <div class="section-content">
+                    大同市博物馆是一座综合性历史博物馆，建筑面积32821平方米，展陈面积1.2万平方米。博物馆以"代地沧桑"为主题，通过丰富的文物展品，全面展示了大同地区从史前文明到近现代的历史发展脉络。馆内收藏文物达5万余件，其中珍贵文物3000余件，是了解大同历史文化的重要窗口。
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>必打卡点</h3>
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <h4>魏都平城展厅</h4>
+                        <p>展示北魏时期大同作为都城的辉煌历史，包括精美的石雕、陶俑等文物</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>辽金元展厅</h4>
+                        <p>重点展示辽代、金代、元代大同地区的政治、经济、文化发展</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>明清大同展厅</h4>
+                        <p>展现明清时期大同的城市建设、商业贸易和民俗文化</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>恐龙化石展厅</h4>
+                        <p>展示大同地区发现的恐龙化石，了解远古时期的自然环境</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>游览路线</h3>
+                <div class="route-steps">
+                    <div class="route-step">
+                        <h4>入馆准备（10分钟）</h4>
+                        <p>在一楼大厅领取免费门票，可租借语音导览设备，建议提前在官网预约</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>史前文明展厅（30分钟）</h4>
+                        <p>从一楼开始，了解大同地区的史前文明和早期历史发展</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>魏都平城展厅（45分钟）</h4>
+                        <p>重点参观，这是博物馆的精华部分，详细了解北魏都城的辉煌</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>辽金元明清展厅（40分钟）</h4>
+                        <p>按时间顺序参观，了解大同在各个历史时期的发展变迁</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>特色展厅（20分钟）</h4>
+                        <p>参观恐龙化石展厅和临时展览，丰富参观体验</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>游览小贴士</h4>
+                <ul>
+                    <li>开放时间：9:00-17:00（16:30停止入馆），周一闭馆</li>
+                    <li>门票：免费，需提前预约或现场领票</li>
+                    <li>建议游览时间：2-3小时</li>
+                    <li>可免费寄存行李，馆内有休息区和纪念品商店</li>
+                    <li>建议携带身份证件，部分展厅可能需要登记</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 华严寺 -->
+        <div class="attraction-card">
+            <div class="attraction-header">
+                <div class="attraction-icon">华</div>
+                <div>
+                    <h2 class="attraction-title">华严寺</h2>
+                    <p class="attraction-subtitle">辽代建筑艺术的瑰宝</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>景点介绍</h3>
+                <div class="section-content">
+                    华严寺位于大同市中心，是中国现存年代较早、保存较完整的一座辽金寺庙建筑群。始建于辽重熙七年（1038年），因佛教华严宗而得名。寺院坐西向东，占地面积达66000平方米，是辽代皇室宗庙，也是辽代建筑艺术的杰出代表。华严寺分为上、下华严寺两部分，现已合并为一个景区。
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>必打卡点</h3>
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <h4>大雄宝殿</h4>
+                        <p>辽代建筑精品，殿内供奉五方佛，壁画精美，是华严寺的核心建筑</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>薄伽教藏殿</h4>
+                        <p>辽代藏经楼，内有精美的辽代彩塑和壁画，艺术价值极高</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>华严宝塔</h4>
+                        <p>明代重建的五层方形密檐式砖塔，高43米，可登塔俯瞰古城</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>辽代壁画</h4>
+                        <p>保存完好的辽代壁画，色彩鲜艳，内容丰富，具有很高的艺术价值</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>游览路线</h3>
+                <div class="route-steps">
+                    <div class="route-step">
+                        <h4>山门入寺（10分钟）</h4>
+                        <p>从华严寺山门进入，购票后可先在入口处了解寺院历史和布局</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>下华严寺（40分钟）</h4>
+                        <p>参观薄伽教藏殿，欣赏辽代彩塑和壁画，这里是华严寺的精华所在</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>上华严寺（50分钟）</h4>
+                        <p>参观大雄宝殿，感受辽代建筑的宏伟，欣赏殿内的佛像和壁画</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>华严宝塔（30分钟）</h4>
+                        <p>登塔远眺，俯瞰大同古城全貌，体验古塔的建筑美学</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>寺院漫步（20分钟）</h4>
+                        <p>在寺院内自由漫步，感受千年古刹的宁静氛围</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>游览小贴士</h4>
+                <ul>
+                    <li>开放时间：8:00-18:00（夏季），8:30-17:30（冬季）</li>
+                    <li>门票：成人50元，学生25元</li>
+                    <li>建议游览时间：2-2.5小时</li>
+                    <li>寺内禁止大声喧哗，拍照时请注意文物保护</li>
+                    <li>登塔需要额外付费，建议穿舒适的鞋子</li>
+                    <li>可请导游讲解，更好地了解建筑和文物的历史价值</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 云冈石窟 -->
+        <div class="attraction-card">
+            <div class="attraction-header">
+                <div class="attraction-icon">云</div>
+                <div>
+                    <h2 class="attraction-title">云冈石窟</h2>
+                    <p class="attraction-subtitle">世界文化遗产，石雕艺术宝库</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>景点介绍</h3>
+                <div class="section-content">
+                    云冈石窟位于大同市西郊武州山南麓，是中国四大石窟之一，1961年被列为全国重点文物保护单位，2001年被联合国教科文组织列为世界文化遗产。石窟开凿于北魏和平年间（460-494年），历时约40年，现存主要洞窟45个，大小佛龛252个，石雕造像51000余躯。云冈石窟代表了公元5-6世纪时中国杰出的佛教石窟艺术成就，是中外文化交流的历史见证。
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>必打卡点</h3>
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <h4>第16-20窟（帝王窟）</h4>
+                        <p>云冈石窟的精华，五个洞窟分别供奉北魏五位皇帝，雕刻精美宏伟</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>第5、6窟</h4>
+                        <p>双窟并列，第6窟有精美的佛传故事浮雕，被誉为"音乐窟"</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>第9、10窟</h4>
+                        <p>前室后室结构，壁面满雕佛像，展现了北魏时期的雕刻技艺</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>第12窟（音乐窟）</h4>
+                        <p>以音乐雕刻著称，前壁上层刻有各种乐器演奏的场面</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>游览路线</h3>
+                <div class="route-steps">
+                    <div class="route-step">
+                        <h4>游客中心（20分钟）</h4>
+                        <p>在游客中心购票，观看云冈石窟介绍影片，了解石窟历史背景</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>第1-4窟（30分钟）</h4>
+                        <p>从东部开始参观，这些洞窟虽然风化严重，但仍能感受到历史的厚重</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>第5、6窟（45分钟）</h4>
+                        <p>重点参观，第6窟的佛传故事浮雕和音乐雕刻是云冈石窟的精华</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>第16-20窟（60分钟）</h4>
+                        <p>云冈石窟最重要的部分，五个帝王窟展现了北魏皇室的宗教信仰</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>其他洞窟（40分钟）</h4>
+                        <p>参观第9、10、12窟等，每个洞窟都有独特的艺术特色</p>
+                    </div>
+                    <div class="route-step">
+                        <h4>云冈博物馆（30分钟）</h4>
+                        <p>参观博物馆，了解更多云冈石窟的历史文化和保护工作</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>游览小贴士</h4>
+                <ul>
+                    <li>开放时间：8:30-17:20（4-10月），8:30-17:00（11-3月）</li>
+                    <li>门票：成人120元，学生票60元</li>
+                    <li>建议游览时间：3-4小时</li>
+                    <li>景区较大，建议穿舒适的步行鞋</li>
+                    <li>洞窟内光线较暗，可携带手电筒辅助观看</li>
+                    <li>部分洞窟不允许拍照，请遵守相关规定</li>
+                    <li>可租借语音导览或请导游，更好地理解石窟艺术</li>
+                    <li>景区有观光车，可根据体力情况选择乘坐</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.attraction-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+    
+    <a href="index.html" class="bottom-nav-button">← 返回行程页面</a>
+</body>
+</html>
